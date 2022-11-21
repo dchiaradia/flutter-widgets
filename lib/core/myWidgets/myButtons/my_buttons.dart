@@ -14,14 +14,25 @@ class MyButtons extends StatefulWidget {
   IconData? myPrefixIcon;
   double? myIconSize = 12;
 
-  var myCallback;
+  VoidCallback myCallback = () {};
   bool isLoadingButton = false;
   double borderRadius = buttonRadius;
   ButtonStyle? style;
 
   MyButtons.simple({required this.text, required callback}) {
-    style = defaultButtonStyle;
     myCallback = callback;
+    style = ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        backgroundColor: MaterialStateProperty.all(buttonBackgroundColor),
+        foregroundColor: MaterialStateProperty.all(buttonTextColor),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(buttonRadius))),
+        textStyle: MaterialStateProperty.all(const TextStyle(
+          fontFamily: 'Rubik',
+          fontStyle: buttonFontStyle,
+          fontSize: buttonFontSize,
+          fontWeight: FontWeight.w600,
+        )));
   }
 
   MyButtons.custom({
