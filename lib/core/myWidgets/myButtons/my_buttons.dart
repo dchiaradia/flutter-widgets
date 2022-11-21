@@ -1,25 +1,37 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/core/myWidgets/myColors/my_colors.dart';
 import 'package:flutter_widgets/core/myWidgets/styles.dart';
 
 class MyButtons extends StatefulWidget {
+  //PROPERTIES
+  double myHeight = buttonHeight;
+  VoidCallback myCallback = () {};
+  bool isLoadingButton = false;
+  bool _isLoading = false;
+
+  //TEXT OPTIONS
   String text;
-  Color myTextColor = Colors.white;
+  Color myTextColor = buttonTextColor;
   double myFontSize = buttonFontSize;
   MainAxisAlignment myAlingment = MainAxisAlignment.center;
 
-  double myHeight = buttonHeight;
-  IconData? mySufixIcon;
-  IconData? myPrefixIcon;
-  double? myIconSize = 12;
-
-  VoidCallback myCallback = () {};
-  bool isLoadingButton = false;
+  //LAYOUT OPTIONS
   double borderRadius = buttonRadius;
   ButtonStyle? style;
 
-  MyButtons.simple({required this.text, required callback}) {
+  //ICON OPTIONS
+  IconData? mySufixIcon;
+  IconData? myPrefixIcon;
+  double? myIconSize = 12;
+  Color myIconColor = buttonIconColor;
+
+  MyButtons({
+    required this.text,
+    required callback,
+    this.isLoadingButton = false,
+  }) {
     myCallback = callback;
     style = ButtonStyle(
         elevation: MaterialStateProperty.all(0),
@@ -28,27 +40,29 @@ class MyButtons extends StatefulWidget {
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(buttonRadius))),
         textStyle: MaterialStateProperty.all(const TextStyle(
-          fontFamily: 'Rubik',
+          fontFamily: buttonFontFamily,
           fontStyle: buttonFontStyle,
           fontSize: buttonFontSize,
-          fontWeight: FontWeight.w600,
+          fontWeight: buttonFontWeight,
         )));
   }
 
   MyButtons.custom({
     required this.text,
+    required callback,
     MainAxisAlignment? alingment,
     double? height,
     Color? backgroundColor,
     Color? textColor,
     double? borderRadius,
-    double fontSize = 16,
-    FontStyle fontStyle = FontStyle.normal,
+    double? fontSize = buttonFontSize,
+    String? fontFamily = buttonFontFamily,
+    FontStyle? fontStyle = buttonFontStyle,
     FontWeight fontWeight = FontWeight.w600,
     IconData? sufixIcon,
     IconData? prefixIcon,
+    Color? iconColor,
     double iconSize = 12,
-    required callback,
     this.isLoadingButton = false,
   }) {
     myCallback = callback;
@@ -60,17 +74,17 @@ class MyButtons extends StatefulWidget {
     myPrefixIcon = prefixIcon;
     mySufixIcon = sufixIcon;
     myIconSize = iconSize;
+    myIconColor = iconColor ?? myIconColor;
 
     style = ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         backgroundColor:
             MaterialStateProperty.all(backgroundColor ?? buttonBackgroundColor),
-        foregroundColor:
-            MaterialStateProperty.all(textColor ?? buttonTextColor),
+        foregroundColor: MaterialStateProperty.all(myTextColor),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? buttonRadius))),
         textStyle: MaterialStateProperty.all(TextStyle(
-          fontFamily: 'Rubik',
+          fontFamily: fontFamily,
           fontSize: fontSize,
           fontStyle: fontStyle,
           fontWeight: fontWeight,
@@ -90,6 +104,8 @@ class _MyButtonsState extends State<MyButtons> {
       child: ElevatedButton(
           onPressed: () {
             widget.myCallback();
+            widget._isLoading = true;
+            setState(() {});
           },
           style: widget.style,
           child: Row(
@@ -99,23 +115,30 @@ class _MyButtonsState extends State<MyButtons> {
               (widget.myPrefixIcon != null)
                   ? Icon(
                       widget.myPrefixIcon,
-                      color: widget.myTextColor,
+                      color: widget.myIconColor,
                       size: widget.myIconSize,
                     )
                   : Container(),
-              SizedBox(
+              const SizedBox(
                 width: 12,
               ),
               Text(widget.text),
-              SizedBox(
+              const SizedBox(
                 width: 12,
               ),
               (widget.mySufixIcon != null)
                   ? Icon(
                       widget.mySufixIcon,
-                      color: widget.myTextColor,
+                      color: widget.myIconColor,
                       size: widget.myIconSize,
                     )
+                  : Container(),
+              (widget.isLoadingButton && widget._isLoading)
+                  ? const Expanded(
+                      child: Align(
+                      alignment: Alignment.centerRight,
+                      child: CircularProgressIndicator.adaptive(),
+                    ))
                   : Container(),
             ],
           )),
