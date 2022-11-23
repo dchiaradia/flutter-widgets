@@ -82,6 +82,8 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
               subtitle: 'Selecione o Subtitulo',
               prefixIcon: Icons.home,
               sufixIcon: Icons.arrow_right,
+              iconDisableColor: MyColors().mediumGrayColor,
+              iconEnableColor: MyColors().dark,
               isChecked: true,
               enableChecked: true,
             ),
@@ -95,6 +97,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
               isChecked: true,
               leftText: 'Remover',
               leftTextColor: MyColors().danger,
+              iconEnableColor: MyColors().dark,
               myCallbackLeftAction: () {
                 print('Clicou no remover');
               },

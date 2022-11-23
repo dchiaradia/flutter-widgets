@@ -11,6 +11,7 @@ class MyTextEntity extends Equatable {
   final double? textFontSizeH4;
   final double? textFontSizeH5;
   final double? textFontSizeH6;
+
   const MyTextEntity({
     this.textFontSizeH1,
     this.textFontSizeH2,
@@ -27,6 +28,7 @@ class MyTextEntity extends Equatable {
     double? textFontSizeH4,
     double? textFontSizeH5,
     double? textFontSizeH6,
+    FontStyle? fontFamily,
   }) {
     return MyTextEntity(
       textFontSizeH1: textFontSizeH1 ?? this.textFontSizeH1,

@@ -8,7 +8,7 @@
             "mainDisableColor": "#F8F8F8",
             "mainEnableColor": "#FFCB58",
             "mainDarkGrayColor":"#363636",
-            "mainMediumGrayColor": "#F8F8F8",
+            "mainMediumGrayColor": "#9F9F9F",
             "mainSoftGrayColor": "#EFF1F3",
             "mainDangerColor": "#F44336",
             "mainInfoColor": "#3F51B5",
@@ -22,5 +22,12 @@
       "textFontSizeH4":24,
       "textFontSizeH5":20,
       "textFontSizeH6":16
+   },
+   "buttons":{
+      "height": 50,
+      "radius": 12,
+      "backgroundColor": "#000000",
+      "textColor": "#FBFBFB",
+      "buttonIconColor": "#FBFBFB"
    }
 }

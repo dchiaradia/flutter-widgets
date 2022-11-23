@@ -20,4 +20,9 @@ class MyColors {
   //Enable e Disable Colors
   Color enable = mainEnableColor;
   Color disable = mainDisableColor;
+
+  //GreyColors
+  Color darkGrayColor = mainDarkGrayColor;
+  Color mediumGrayColor = mainMediumGrayColor;
+  Color softGrayColor = mainSoftGrayColor;
 }
