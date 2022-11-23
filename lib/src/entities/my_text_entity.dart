@@ -5,20 +5,19 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 
 class MyTextEntity extends Equatable {
-  final double textFontSizeH1;
-  final double textFontSizeH2;
-  final double textFontSizeH3;
-  final double textFontSizeH4;
-  final double textFontSizeH5;
-  final double textFontSizeH6;
-
+  final double? textFontSizeH1;
+  final double? textFontSizeH2;
+  final double? textFontSizeH3;
+  final double? textFontSizeH4;
+  final double? textFontSizeH5;
+  final double? textFontSizeH6;
   const MyTextEntity({
-    required this.textFontSizeH1,
-    required this.textFontSizeH2,
-    required this.textFontSizeH3,
-    required this.textFontSizeH4,
-    required this.textFontSizeH5,
-    required this.textFontSizeH6,
+    this.textFontSizeH1,
+    this.textFontSizeH2,
+    this.textFontSizeH3,
+    this.textFontSizeH4,
+    this.textFontSizeH5,
+    this.textFontSizeH6,
   });
 
   MyTextEntity copyWith({
@@ -52,12 +51,24 @@ class MyTextEntity extends Equatable {
 
   factory MyTextEntity.fromMap(Map<String, dynamic> map) {
     return MyTextEntity(
-      textFontSizeH1: map['textFontSizeH1'] as double,
-      textFontSizeH2: map['textFontSizeH2'] as double,
-      textFontSizeH3: map['textFontSizeH3'] as double,
-      textFontSizeH4: map['textFontSizeH4'] as double,
-      textFontSizeH5: map['textFontSizeH5'] as double,
-      textFontSizeH6: map['textFontSizeH6'] as double,
+      textFontSizeH1: map['textFontSizeH1'] != null
+          ? map['textFontSizeH1'].toDouble() as double
+          : null,
+      textFontSizeH2: map['textFontSizeH2'] != null
+          ? map['textFontSizeH2'].toDouble() as double
+          : null,
+      textFontSizeH3: map['textFontSizeH3'] != null
+          ? map['textFontSizeH3'].toDouble() as double
+          : null,
+      textFontSizeH4: map['textFontSizeH4'] != null
+          ? map['textFontSizeH4'].toDouble() as double
+          : null,
+      textFontSizeH5: map['textFontSizeH5'] != null
+          ? map['textFontSizeH5'].toDouble() as double
+          : null,
+      textFontSizeH6: map['textFontSizeH6'] != null
+          ? map['textFontSizeH6'].toDouble() as double
+          : null,
     );
   }
 
@@ -72,12 +83,12 @@ class MyTextEntity extends Equatable {
   @override
   List<Object> get props {
     return [
-      textFontSizeH1,
-      textFontSizeH2,
-      textFontSizeH3,
-      textFontSizeH4,
-      textFontSizeH5,
-      textFontSizeH6,
+      textFontSizeH1!,
+      textFontSizeH2!,
+      textFontSizeH3!,
+      textFontSizeH4!,
+      textFontSizeH5!,
+      textFontSizeH6!,
     ];
   }
 }

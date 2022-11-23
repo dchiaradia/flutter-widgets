@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:my_widgets/src/entities/my_colors_entity.dart';
+import 'package:my_widgets/src/entities/my_text_entity.dart';
 import 'package:my_widgets/src/widgets/config.dart';
 
 export 'src/widgets/config.dart';
@@ -24,8 +25,8 @@ class MyWidget {
   Future<dynamic> _readJson(String path) async {
     final String response = await rootBundle.loadString(path);
     final data = await json.decode(response);
-    final colors = data['colors'];
-    _setColors(colors);
+    _setColors(data['colors']);
+    _setText(data['text']);
     return data;
   }
 
@@ -42,5 +43,15 @@ class MyWidget {
     mainInfoColor = myColors.mainInfoColor ?? mainInfoColor;
     mainConfirmColor = myColors.mainConfirmColor ?? mainConfirmColor;
     mainAlertColor = myColors.mainAlertColor ?? mainAlertColor;
+  }
+
+  _setText(dynamic mapOfTexts) {
+    MyTextEntity myText = MyTextEntity.fromMap(mapOfTexts);
+    textFontSizeH1 = myText.textFontSizeH1 ?? textFontSizeH1;
+    textFontSizeH2 = myText.textFontSizeH2 ?? textFontSizeH2;
+    textFontSizeH3 = myText.textFontSizeH3 ?? textFontSizeH3;
+    textFontSizeH4 = myText.textFontSizeH4 ?? textFontSizeH4;
+    textFontSizeH5 = myText.textFontSizeH5 ?? textFontSizeH5;
+    textFontSizeH6 = myText.textFontSizeH6 ?? textFontSizeH6;
   }
 }

@@ -1,19 +1,26 @@
 {    
-"colors":
-       {
-          "mainBlackColor":"#000000",
-          "mainDarkColor":"#FFB311",
-          "mainMediumColor":"#FFCB58",
-          "mainSoftColor": "#FFD77D",
-          "mainWhiteColor": "#FBFBFB",
-          "mainDisableColor": "#F8F8F8",
-          "mainEnableColor": "#FFCB58",
-          "mainDarkGrayColor":"#363636",
-          "mainMediumGrayColor": "#F8F8F8",
-          "mainSoftGrayColor": "#EFF1F3",
-          "mainDangerColor": "#F44336",
-          "mainInfoColor": "#3F51B5",
-          "mainConfirmColor": "#4CAF50",
-          "mainAlertColor":"#FF9800"
-       }
+   "colors":{
+            "mainBlackColor":"#000000",
+            "mainDarkColor":"#FFB311",
+            "mainMediumColor":"#FFCB58",
+            "mainSoftColor": "#FFD77D",
+            "mainWhiteColor": "#FBFBFB",
+            "mainDisableColor": "#F8F8F8",
+            "mainEnableColor": "#FFCB58",
+            "mainDarkGrayColor":"#363636",
+            "mainMediumGrayColor": "#F8F8F8",
+            "mainSoftGrayColor": "#EFF1F3",
+            "mainDangerColor": "#F44336",
+            "mainInfoColor": "#3F51B5",
+            "mainConfirmColor": "#4CAF50",
+            "mainAlertColor":"#FF9800"
+   },
+   "text":{
+      "textFontSizeH1":36,
+      "textFontSizeH2":32,
+      "textFontSizeH3":28,
+      "textFontSizeH4":24,
+      "textFontSizeH5":20,
+      "textFontSizeH6":16
+   }
 }
