@@ -8,6 +8,8 @@ export 'src/widgets/myColors/my_colors.dart';
 export 'src/widgets/myInputs/my_input.dart';
 export 'src/widgets/myText/my_text.dart';
 export 'src/widgets/myTiles/my_tile.dart';
+export 'src/widgets/mySpaces/my_space.dart';
+export 'src/widgets/myAvatar/my_avatar.dart';
 
 class MyWidget {
   initializeWithJson(String path) async {

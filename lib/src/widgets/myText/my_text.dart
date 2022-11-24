@@ -6,7 +6,7 @@ import 'package:my_widgets/src/widgets/config.dart';
 class MyText extends StatefulWidget {
   //TEXT OPTIONS
   String text;
-  Color myTextColor = buttonTextColor;
+  Color myTextColor = textColor;
   double myFontSize = buttonFontSize;
   TextStyle? myTextStyle;
   MainAxisAlignment myAlingment = MainAxisAlignment.start;
