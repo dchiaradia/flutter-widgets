@@ -50,7 +50,7 @@ class MyAvatar extends StatelessWidget {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      child: buildAvatar(),
+                      child: makeAvatar(),
                     ),
                     MySpace.horizontal(20),
                     Column(
@@ -74,6 +74,10 @@ class MyAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return makeAvatar();
+  }
+
+  Widget makeAvatar() {
     return (hasBadges) ? buildAvatarWithBadged() : buildAvatar();
   }
 
@@ -93,11 +97,7 @@ class MyAvatar extends StatelessWidget {
       borderRadius: BorderRadius.circular(5),
       position: BadgePosition.topEnd(),
       padding: EdgeInsets.all(2),
-      badgeContent: Text(
-        'NEW',
-        style: TextStyle(
-            color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-      ),
+      badgeContent: badgedWidget,
       child: buildAvatar(),
     );
   }

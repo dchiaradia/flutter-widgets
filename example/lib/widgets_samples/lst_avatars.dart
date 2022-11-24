@@ -27,9 +27,9 @@ List<Widget> get lstOfAvatars => [
         backgroundColor: MyColors().white,
       ),
       MySpace.vertical(12),
-      // MyAvatar(
-      //     size: 50,
-      //     hasBadges: false,
-      //     avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4'),
+      MyAvatar(
+          size: 50,
+          hasBadges: false,
+          avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4'),
       MySpace.vertical(32),
     ];
