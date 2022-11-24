@@ -1,3 +1,4 @@
+import 'package:example/widgets_samples/lst_avatars.dart';
 import 'package:example/widgets_samples/lst_buttons.dart';
 import 'package:example/widgets_samples/lst_inputs.dart';
 import 'package:example/widgets_samples/lst_texts.dart';
@@ -16,18 +17,17 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors().softGrayColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           padding: const EdgeInsets.symmetric(
-            horizontal: 16,
+            horizontal: 8,
             vertical: 30,
           ),
           children: [
             MySpace.vertical(32),
-            const MyAvatar(
-                size: 90,
-                avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4'),
+            ...lstOfAvatars,
             MyText.h2(
               text: 'Tipografias',
               color: MyColors().black,
