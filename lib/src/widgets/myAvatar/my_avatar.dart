@@ -10,27 +10,24 @@ class MyAvatar extends StatelessWidget {
     this.size = 50,
     this.borderColor = Colors.black,
     this.borderSize = 0,
-    this.hasBadges = false,
-    this.badgedLeft = 0,
-    this.badgedTop = 0,
     this.badgedColor = Colors.purple,
     this.badgedWidget,
+    this.position,
   }) : super(key: key);
 
   final String avatar;
   final double size;
   final Color borderColor;
   final double borderSize;
-  final bool hasBadges;
-  final double badgedTop;
-  final double badgedLeft;
   final Color badgedColor;
   final Widget? badgedWidget;
+  final BadgePosition? position;
 
   Widget userTile(
       {required Widget firstLine,
       Widget? secondLine,
       Widget? thirdLine,
+      Widget? bottomWidget,
       double tileRadius = 20,
       required Color backgroundColor}) {
     return Stack(
@@ -50,7 +47,7 @@ class MyAvatar extends StatelessWidget {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      child: makeAvatar(),
+                      child: createAvatar(),
                     ),
                     MySpace.horizontal(20),
                     Column(
@@ -64,6 +61,9 @@ class MyAvatar extends StatelessWidget {
                     )
                   ],
                 ),
+                (bottomWidget != null)
+                    ? createBottomWidget(bottomWidget)
+                    : Container(),
               ],
             ),
           ),
@@ -74,11 +74,20 @@ class MyAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return makeAvatar();
+    return createAvatar();
   }
 
-  Widget makeAvatar() {
-    return (hasBadges) ? buildAvatarWithBadged() : buildAvatar();
+  Widget createAvatar() {
+    return (badgedWidget != null) ? buildAvatarWithBadged() : buildAvatar();
+  }
+
+  Widget createBottomWidget(Widget bottomWidget) {
+    return Column(
+      children: [
+        MySpace.vertical(30),
+        bottomWidget,
+      ],
+    );
   }
 
   Widget buildAvatar() {
@@ -95,9 +104,10 @@ class MyAvatar extends StatelessWidget {
     return Badge(
       shape: BadgeShape.square,
       borderRadius: BorderRadius.circular(5),
-      position: BadgePosition.topEnd(),
-      padding: EdgeInsets.all(2),
+      position: position ?? BadgePosition.bottomEnd(),
+      padding: const EdgeInsets.all(2),
       badgeContent: badgedWidget,
+      badgeColor: badgedColor,
       child: buildAvatar(),
     );
   }

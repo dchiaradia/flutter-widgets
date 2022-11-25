@@ -9,5 +9,6 @@ List<Widget> get lstOfText => [
       MyText.h4(text: 'Tipografia h4', color: MyColors().dark),
       MyText.h5(text: 'Tipografia h5', color: MyColors().dark),
       MyText.h6(text: 'Tipografia h6', color: MyColors().dark),
+      MyText.h7(text: 'Tipografia h7', color: MyColors().dark),
       MySpace.vertical(32),
     ];

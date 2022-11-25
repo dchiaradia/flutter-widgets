@@ -32,6 +32,8 @@ double textFontSizeH3 = 28;
 double textFontSizeH4 = 24;
 double textFontSizeH5 = 20;
 double textFontSizeH6 = 16;
+double textFontSizeH7 = 12;
+
 const FontStyle textFontStyle = FontStyle.normal;
 const FontWeight textFontWeight = FontWeight.w400;
 const TextAlign textAlign = TextAlign.start;

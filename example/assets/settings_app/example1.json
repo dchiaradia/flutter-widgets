@@ -21,7 +21,8 @@
       "textFontSizeH3":28,
       "textFontSizeH4":24,
       "textFontSizeH5":20,
-      "textFontSizeH6":16
+      "textFontSizeH6":16,
+      "textFontSizeH7":12
    },
    "buttons":{
       "height": 50,

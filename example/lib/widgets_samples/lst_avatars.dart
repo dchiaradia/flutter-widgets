@@ -8,28 +8,45 @@ List<Widget> get lstOfAvatars => [
       ),
       MySpace.vertical(8),
       MyAvatar(
-        size: 50,
+        size: 40,
         avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4',
-        borderSize: 5,
+        borderSize: 3,
         borderColor: MyColors().confirm,
-        hasBadges: true,
-        badgedColor: MyColors().info,
-        badgedLeft: 25,
-        badgedTop: 60,
+        badgedColor: MyColors().danger,
+        position: BadgePosition.bottomStart(start: 20),
         badgedWidget: MyText.h6(
           text: 'New',
           color: MyColors().white,
         ),
       ).userTile(
-        firstLine: MyText.h4(text: 'Eduardo Chiaradia'),
-        secondLine: MyText.h6(text: 'eduardo@chiaradia.com.br'),
-        thirdLine: MyText.h6(text: 'CPF: 325.***.***-65'),
-        backgroundColor: MyColors().white,
-      ),
-      MySpace.vertical(12),
+          firstLine: MyText.h5(text: 'Eduardo Chiaradia'),
+          secondLine: MyText.h6(text: 'eduardo@chiaradia.com.br'),
+          thirdLine: Column(
+            children: [
+              MyText.h7(text: 'CPF: 325.***.***-65'),
+            ],
+          ),
+          backgroundColor: MyColors().white,
+          bottomWidget: Column(
+            children: [
+              Container(
+                color: MyColors().mediumGrayColor,
+                height: 1,
+              ),
+              MySpace.vertical(12),
+              Row(
+                children: const [
+                  Expanded(child: Icon(Icons.phone)),
+                  Expanded(child: Icon(Icons.email)),
+                  Expanded(child: Icon(Icons.map)),
+                ],
+              ),
+            ],
+          )),
+      MySpace.vertical(24),
       MyAvatar(
-          size: 50,
-          hasBadges: false,
-          avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4'),
+        size: 40,
+        avatar: 'https://avatars.githubusercontent.com/u/11356452?v=4',
+      ),
       MySpace.vertical(32),
     ];

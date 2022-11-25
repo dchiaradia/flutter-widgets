@@ -11,6 +11,7 @@ class MyTextEntity extends Equatable {
   final double? textFontSizeH4;
   final double? textFontSizeH5;
   final double? textFontSizeH6;
+  final double? textFontSizeH7;
 
   const MyTextEntity({
     this.textFontSizeH1,
@@ -19,6 +20,7 @@ class MyTextEntity extends Equatable {
     this.textFontSizeH4,
     this.textFontSizeH5,
     this.textFontSizeH6,
+    this.textFontSizeH7,
   });
 
   MyTextEntity copyWith({
@@ -28,6 +30,7 @@ class MyTextEntity extends Equatable {
     double? textFontSizeH4,
     double? textFontSizeH5,
     double? textFontSizeH6,
+    double? textFontSizeH7,
     FontStyle? fontFamily,
   }) {
     return MyTextEntity(
@@ -37,6 +40,7 @@ class MyTextEntity extends Equatable {
       textFontSizeH4: textFontSizeH4 ?? this.textFontSizeH4,
       textFontSizeH5: textFontSizeH5 ?? this.textFontSizeH5,
       textFontSizeH6: textFontSizeH6 ?? this.textFontSizeH6,
+      textFontSizeH7: textFontSizeH7 ?? this.textFontSizeH7,
     );
   }
 
@@ -48,6 +52,7 @@ class MyTextEntity extends Equatable {
       'textFontSizeH4': textFontSizeH4,
       'textFontSizeH5': textFontSizeH5,
       'textFontSizeH6': textFontSizeH6,
+      'textFontSizeH7': textFontSizeH7,
     };
   }
 
@@ -71,6 +76,9 @@ class MyTextEntity extends Equatable {
       textFontSizeH6: map['textFontSizeH6'] != null
           ? map['textFontSizeH6'].toDouble() as double
           : null,
+      textFontSizeH7: map['textFontSizeH7'] != null
+          ? map['textFontSizeH7'].toDouble() as double
+          : null,
     );
   }
 
@@ -91,6 +99,7 @@ class MyTextEntity extends Equatable {
       textFontSizeH4!,
       textFontSizeH5!,
       textFontSizeH6!,
+      textFontSizeH7!,
     ];
   }
 }

@@ -138,6 +138,24 @@ class MyText extends StatefulWidget {
     myTextAlign = textAlign;
   }
 
+  MyText.h7({
+    required this.text,
+    Color color = textColor,
+    String fontFamily = textFontFamily,
+    FontWeight fontWeight = textFontWeight,
+    FontStyle fontStyle = textFontStyle,
+    TextAlign textAlign = textAlign,
+  }) {
+    myTextStyle = TextStyle(
+      color: color,
+      fontSize: textFontSizeH7,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+    );
+    myTextAlign = textAlign;
+  }
+
   @override
   State<MyText> createState() => _MyTextState();
 }

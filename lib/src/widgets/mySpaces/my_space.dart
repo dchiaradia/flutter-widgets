@@ -23,8 +23,8 @@ class MySpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: this.heightValue,
-      width: this.widthValue,
+      height: heightValue,
+      width: widthValue,
     );
   }
 }

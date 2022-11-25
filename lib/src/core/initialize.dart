@@ -43,6 +43,7 @@ class initalize {
     textFontSizeH4 = myText.textFontSizeH4 ?? textFontSizeH4;
     textFontSizeH5 = myText.textFontSizeH5 ?? textFontSizeH5;
     textFontSizeH6 = myText.textFontSizeH6 ?? textFontSizeH6;
+    textFontSizeH7 = myText.textFontSizeH7 ?? textFontSizeH7;
   }
 
   _setButtonsSettings(dynamic mapOfButtons) {

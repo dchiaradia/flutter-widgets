@@ -9,7 +9,7 @@ packages:
     source: hosted
     version: "2.9.0"
   badges:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: badges
       url: "https://pub.dartlang.org"
@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "2.1.0"
   cached_network_image:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: cached_network_image
       url: "https://pub.dartlang.org"
@@ -343,6 +343,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_up_panel:
+    dependency: transitive
+    description:
+      name: sliding_up_panel
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+1"
   source_span:
     dependency: transitive
     description:
