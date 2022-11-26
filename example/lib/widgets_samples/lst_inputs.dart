@@ -60,6 +60,7 @@ List<Widget> get lstOfInputs => [
                 validatorType: ValidatorType.isCPF,
                 backgroundEnableColor: Colors.lightBlue,
                 textColor: Colors.white,
+                maskText: '###.###.###-##',
                 minLines: 1),
             MySpace.vertical(12),
             MyButtons.custom(

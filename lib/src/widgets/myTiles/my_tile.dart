@@ -3,12 +3,20 @@ import 'package:flutter/material.dart';
 
 import '../../../my_widgets.dart';
 
+enum TileType { icon, widget }
+
 class MyTile extends StatefulWidget {
   //MAIN PROPERTIES
   VoidCallback myCallback = () {};
   VoidCallback? myCallbackLeftAction;
   bool isChecked;
   bool? enableChecked;
+  double? size = 60;
+
+  TileType tileType = TileType.icon;
+  Widget? prefixWidget;
+  Widget? mainWidget;
+  Widget? sufixWidget;
 
   //LAYOUT OPTIONS
   double myBorderRadius = buttonRadius;
@@ -26,7 +34,7 @@ class MyTile extends StatefulWidget {
   Color? mySufixColor = MyColors().enable;
 
   //TEXT OPTIONS
-  String title;
+  String? title;
   String? subtitle;
   String? leftText;
   Color? leftTextColor;
@@ -52,6 +60,7 @@ class MyTile extends StatefulWidget {
     this.leftTextColor,
     this.myCallbackLeftAction,
     this.enableChecked = false,
+    this.size = 60,
   }) {
     myBorderRadius = borderRadius ?? myBorderRadius;
     myBackgroundColor = backgroundColor ?? myBackgroundColor;
@@ -66,6 +75,23 @@ class MyTile extends StatefulWidget {
     mySufixColor = sufixColor ?? mySufixColor;
     mySufixIconSize = sufixIconSize ?? mySufixIconSize;
     leftTextColor = leftTextColor ?? myTextColor;
+    tileType = TileType.icon;
+  }
+
+  MyTile.widget({
+    this.isChecked = true,
+    required this.prefixWidget,
+    required this.mainWidget,
+    this.sufixWidget,
+    this.myBorderRadius = 18,
+    this.size = 60,
+    this.myBackgroundColor = Colors.white,
+    this.myBorderColor = Colors.black,
+    VoidCallback? callback,
+  }) {
+    enableChecked = false;
+    tileType = TileType.widget;
+    myCallback = callback ?? () {};
   }
 
   @override
@@ -73,68 +99,94 @@ class MyTile extends StatefulWidget {
 }
 
 class _MyTileState extends State<MyTile> {
+  Widget createContent() {
+    if (widget.tileType == TileType.icon) {
+      return createIconContent();
+    } else if (widget.tileType == TileType.widget) {
+      return createWidgetContent();
+    }
+    return Container();
+  }
+
+  Widget createIconContent() {
+    return Row(
+      children: [
+        Icon(
+          widget.myPrefixIcon,
+          color: (widget.isChecked)
+              ? widget.myIconCheckedColor
+              : widget.myIconColor,
+          size: widget.myIconSize,
+        ),
+        const SizedBox(
+          width: 12,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MyText.h5(text: widget.title!),
+              (widget.subtitle != null)
+                  ? MyText.h6(text: widget.subtitle!)
+                  : Container(),
+            ],
+          ),
+        ),
+        GestureDetector(
+            onTap: () {
+              if (widget.myCallbackLeftAction != null) {
+                widget.myCallbackLeftAction!();
+              }
+            },
+            child: Row(children: [
+              (widget.leftText != null)
+                  ? MyText.h6(
+                      text: widget.leftText!,
+                      color: widget.leftTextColor!,
+                    )
+                  : Container(),
+              (widget.mySufixIcon != null)
+                  ? Icon(
+                      widget.mySufixIcon,
+                      color: (widget.mySufixColor != null)
+                          ? widget.mySufixColor
+                          : widget.myIconCheckedColor,
+                      size: widget.mySufixIconSize,
+                    )
+                  : Container(),
+            ])),
+      ],
+    );
+  }
+
+  Widget createWidgetContent() {
+    return Row(
+      children: [
+        widget.prefixWidget ?? Container(),
+        const SizedBox(
+          width: 12,
+        ),
+        Expanded(child: widget.mainWidget ?? Container()),
+        widget.sufixWidget ?? Container(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         child: Padding(
           padding: EdgeInsets.only(left: 0, right: 0, top: 8),
           child: Container(
-            height: 67,
+            height: widget.size,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.myBorderRadius),
               border: Border.all(color: widget.myBorderColor),
               color: widget.myBackgroundColor,
             ),
             padding: EdgeInsets.only(left: 14, right: 10, top: 0),
-            child: Row(
-              children: [
-                Icon(
-                  widget.myPrefixIcon,
-                  color: (widget.isChecked)
-                      ? widget.myIconCheckedColor
-                      : widget.myIconColor,
-                  size: widget.myIconSize,
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.h5(text: widget.title),
-                      (widget.subtitle != null)
-                          ? MyText.h6(text: widget.subtitle!)
-                          : Container(),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                    onTap: () {
-                      if (widget.myCallbackLeftAction != null) {
-                        widget.myCallbackLeftAction!();
-                      }
-                    },
-                    child: Row(children: [
-                      (widget.leftText != null)
-                          ? MyText.h6(
-                              text: widget.leftText!,
-                              color: widget.leftTextColor!,
-                            )
-                          : Container(),
-                      (widget.mySufixIcon != null)
-                          ? Icon(
-                              widget.mySufixIcon,
-                              color: (widget.mySufixColor != null)
-                                  ? widget.mySufixColor
-                                  : widget.myIconCheckedColor,
-                              size: widget.mySufixIconSize,
-                            )
-                          : Container(),
-                    ])),
-              ],
-            ),
+            child: createContent(),
           ),
         ),
         onTap: () async {

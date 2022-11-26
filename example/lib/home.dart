@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:my_widgets/my_widgets.dart';
 
 class MyWidgetsHomePage extends StatefulWidget {
-  const MyWidgetsHomePage({super.key});
+  MyWidgetsHomePage({super.key});
+
+  int value = 0;
 
   @override
   State<MyWidgetsHomePage> createState() => _MyWidgetsHomePageState();
@@ -52,6 +54,58 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
               MyText.h2(
                 text: 'Tiles',
                 color: MyColors().black,
+              ),
+              MyTile.widget(
+                prefixWidget: MyAvatar(
+                  size: 20,
+                  borderColor: (widget.value == 0)
+                      ? MyColors().dark
+                      : MyColors().darkGrayColor,
+                  borderSize: 3,
+                  avatar:
+                      'https://avatars.githubusercontent.com/u/11356452?v=4',
+                ),
+                mainWidget: MyText(text: 'Tile de Widgets'),
+                sufixWidget: MyText.h6(
+                  text: 'Excluir',
+                  color: MyColors().danger,
+                ),
+                size: 60,
+                myBorderColor: (widget.value == 0)
+                    ? MyColors().dark
+                    : MyColors().softGrayColor,
+                callback: () {
+                  print('Callback');
+                  setState(() {
+                    widget.value = 0;
+                  });
+                },
+              ),
+              MyTile.widget(
+                prefixWidget: MyAvatar(
+                  size: 20,
+                  borderColor: (widget.value == 1)
+                      ? MyColors().dark
+                      : MyColors().darkGrayColor,
+                  borderSize: 3,
+                  avatar:
+                      'https://avatars.githubusercontent.com/u/11356452?v=4',
+                ),
+                mainWidget: MyText(text: 'Tile de Widgets'),
+                sufixWidget: MyText.h6(
+                  text: 'Excluir',
+                  color: MyColors().danger,
+                ),
+                size: 60,
+                myBorderColor: (widget.value == 1)
+                    ? MyColors().dark
+                    : MyColors().softGrayColor,
+                callback: () {
+                  print('Callback');
+                  setState(() {
+                    widget.value = 1;
+                  });
+                },
               ),
               ...lstOfTiles,
               MyText.h2(
