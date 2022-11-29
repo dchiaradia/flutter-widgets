@@ -9,6 +9,7 @@ class MyBottomSheet extends StatefulWidget {
   final double minHeight;
   final Widget child;
   final double radius;
+  PanelController panelController;
   Color? backgroundColor = MyColors().white;
 
   VoidCallback? onOpenCallback = () {};
@@ -22,8 +23,7 @@ class MyBottomSheet extends StatefulWidget {
     required this.minHeight,
     required this.child,
     this.radius = 20,
-    this.onOpenCallback,
-    this.onCloseCallback,
+    required this.panelController,
     this.backgroundColor = Colors.white,
     this.defaultState = PanelState.CLOSED,
   }) : super(key: key);
@@ -37,9 +37,8 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    PanelController panelController = PanelController();
     return SlidingUpPanel(
-      controller: panelController,
+      controller: widget.panelController,
       renderPanelSheet: true,
       color: widget.backgroundColor!,
       maxHeight: widget.maxHeight + additionalHeight,

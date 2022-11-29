@@ -12,6 +12,7 @@ class MyWidgetsHomePage extends StatefulWidget {
   MyWidgetsHomePage({super.key});
 
   int value = 0;
+  PanelController panelController = PanelController();
 
   @override
   State<MyWidgetsHomePage> createState() => _MyWidgetsHomePageState();
@@ -62,6 +63,23 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                 iconSize: 24,
                 backgroundColor: MyColors().dark,
               ),
+              MySpace.vertical(32),
+              MyText.h2(
+                text: 'BottomSheet',
+                color: MyColors().black,
+              ),
+              MySpace.vertical(12),
+              MyButtons.custom(
+                text: 'Mostrar/Ocultar Bottomsheet',
+                backgroundColor: MyColors().confirm,
+                textColor: MyColors().white,
+                callback: () {
+                  (widget.panelController.isPanelShown)
+                      ? widget.panelController.hide()
+                      : widget.panelController.show();
+                },
+              ),
+              MySpace.vertical(48),
               MyText.h2(
                 text: 'Tiles',
                 color: MyColors().black,
@@ -133,6 +151,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
             //PARA USAR O MYBOTTOMSHEET É NECESSÁRIO ESTAR EM UMA STACK
             maxHeight: 350,
             minHeight: 100,
+            panelController: widget.panelController,
             radius: 32,
             backgroundColor: MyColors().white,
             defaultState: PanelState.CLOSED,
