@@ -12,6 +12,7 @@ class MyWidgetsHomePage extends StatefulWidget {
   MyWidgetsHomePage({super.key});
 
   int value = 0;
+  bool panelSlidingUpShowed = false;
   PanelController panelController = PanelController();
 
   @override
@@ -64,9 +65,11 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                 backgroundColor: MyColors().confirm,
                 textColor: MyColors().white,
                 callback: () {
-                  (widget.panelController.isPanelShown)
-                      ? widget.panelController.hide()
-                      : widget.panelController.show();
+                  (!widget.panelSlidingUpShowed)
+                      ? widget.panelSlidingUpShowed = true
+                      : widget.panelSlidingUpShowed = false;
+
+                  setState(() {});
                 },
               ),
               MySpace.vertical(48),
@@ -137,26 +140,28 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
             ],
           ),
         ),
-        MyBottomSheet(
-            //PARA USAR O MYBOTTOMSHEET É NECESSÁRIO ESTAR EM UMA STACK
-            maxHeight: 350,
-            minHeight: 100,
-            panelController: widget.panelController,
-            radius: 32,
-            backgroundColor: MyColors().white,
-            defaultState: PanelState.CLOSED,
-            child: Column(
-              children: [
-                MyText.h2(
-                  text: 'Menu',
-                  color: MyColors().black,
-                ),
-                MyMenu(
-                  lstItens: lstOfMenuItens,
-                ),
-                MySpace.vertical(32),
-              ],
-            )),
+        (!widget.panelSlidingUpShowed)
+            ? Container()
+            : MyBottomSheet(
+                //PARA USAR O MYBOTTOMSHEET É NECESSÁRIO ESTAR EM UMA STACK
+                maxHeight: 550,
+                minHeight: 100,
+                panelController: widget.panelController,
+                radius: 32,
+                backgroundColor: MyColors().white,
+                defaultState: PanelState.CLOSED,
+                child: Column(
+                  children: [
+                    MyText.h2(
+                      text: 'Menu',
+                      color: MyColors().black,
+                    ),
+                    MyMenu(
+                      lstItens: lstOfMenuItens,
+                    ),
+                    MySpace.vertical(32),
+                  ],
+                )),
       ]),
     );
   }

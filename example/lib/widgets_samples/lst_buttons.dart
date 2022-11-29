@@ -103,5 +103,28 @@ List<Widget> get lstOfButtons => [
           ),
         ],
       ),
+      MySpace.vertical(12),
+      MyButtons.switchButton(
+        initialState: false,
+        width: 200,
+        onCallback: () {
+          print('Ativou');
+        },
+        offCallback: () {
+          print('Inativou');
+        },
+        onIcon: FontAwesomeIcons.trainSubway,
+        offIcon: FontAwesomeIcons.trainSubway,
+        onText: Text(
+          'Trem habilitado',
+          style: TextStyle(color: MyColors().black),
+        ),
+        offText: Text('Trem não habilitado'),
+        onBackGroundColor: MyColors().dark,
+        offBackGroundColor: MyColors().mediumGrayColor,
+        onIconColor: MyColors().dark,
+        offIconColor: MyColors().mediumGrayColor,
+        iconSize: 25,
+      ),
       MySpace.vertical(32),
     ];
