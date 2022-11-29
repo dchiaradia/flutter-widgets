@@ -53,16 +53,6 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                 color: MyColors().black,
               ),
               ...lstOfButtons,
-              MyButtons.switchButton(
-                callback: () {
-                  print('switchbutton');
-                  setState(() {});
-                },
-                icon: FontAwesomeIcons.strava,
-                iconColor: MyColors().white,
-                iconSize: 24,
-                backgroundColor: MyColors().dark,
-              ),
               MySpace.vertical(32),
               MyText.h2(
                 text: 'BottomSheet',

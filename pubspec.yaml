@@ -18,6 +18,7 @@ dependencies:
   hexcolor: ^2.0.7
   intl: ^0.17.0
   mask_text_input_formatter: ^2.4.0
+  rolling_switch: ^0.0.2
   sliding_up_panel: ^2.0.0+1
   validators: ^3.0.0
 

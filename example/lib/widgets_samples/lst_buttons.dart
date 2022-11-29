@@ -76,6 +76,31 @@ List<Widget> get lstOfButtons => [
             backgroundColor: MyColors().black,
             isLoadingButton: true,
           ),
+          MySpace(
+            widthValue: 8,
+          ),
+          MyButtons.switchButton(
+            initialState: true,
+            width: 100,
+            onCallback: () {
+              print('Ativou');
+            },
+            offCallback: () {
+              print('Inativou');
+            },
+            onIcon: FontAwesomeIcons.check,
+            offIcon: FontAwesomeIcons.powerOff,
+            onText: Text(
+              'On',
+              style: TextStyle(color: MyColors().white),
+            ),
+            offText: Text('Off'),
+            onBackGroundColor: MyColors().confirm,
+            offBackGroundColor: MyColors().mediumGrayColor,
+            onIconColor: MyColors().confirm,
+            offIconColor: MyColors().mediumGrayColor,
+            iconSize: 25,
+          ),
         ],
       ),
       MySpace.vertical(32),

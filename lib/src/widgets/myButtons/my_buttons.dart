@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_widgets/my_widgets.dart';
+import 'package:rolling_switch/rolling_switch.dart';
 
 enum ButtonType { roundIcon, square, switchButton }
 
@@ -12,6 +13,20 @@ class MyButtons extends StatefulWidget {
   ButtonType buttonType = ButtonType.square;
   Color myBackgroundColor = MyColors().dark;
   bool? value;
+  double width = 100;
+
+  //PROPERTIES FOR SWITCH BUTTONS
+  VoidCallback onCallback = () {};
+  VoidCallback offCallback = () {};
+  Color? offBackGroundColor = MyColors().mediumGrayColor;
+  Color? onBackGroundColor = MyColors().dark;
+  Color? offIconColor = MyColors().mediumGrayColor;
+  Color? onIconColor = MyColors().dark;
+  IconData? onIcon = Icons.check_circle;
+  IconData? offIcon = Icons.check;
+  Text? onText = Text('Ativo');
+  Text? offText = Text('Inativo');
+  bool initialState = false;
 
   //TEXT OPTIONS
   String? text;
@@ -123,32 +138,24 @@ class MyButtons extends StatefulWidget {
     );
   }
 
-  MyButtons.switchButton({
-    required callback,
-    double? height,
-    Color? backgroundColor,
-    required IconData icon,
-    Color? iconColor,
-    double iconSize = 12,
-    this.value = true,
-  }) {
-    myCallback = callback;
+  MyButtons.switchButton(
+      {required this.onCallback,
+      required this.offCallback,
+      required this.initialState,
+      double? height,
+      this.width = 150,
+      this.onBackGroundColor,
+      this.offBackGroundColor,
+      this.onIconColor,
+      this.offIconColor,
+      this.onIcon,
+      this.offIcon,
+      double iconSize = 12,
+      this.onText,
+      this.offText}) {
     buttonType = ButtonType.switchButton;
-    myBackgroundColor = backgroundColor ?? myBackgroundColor;
-
     myHeight = height ?? buttonHeight;
     myIconSize = iconSize;
-    myIconColor = iconColor ?? myIconColor;
-    myPrefixIcon = icon;
-
-    style = ButtonStyle(
-      elevation: MaterialStateProperty.all(0),
-      backgroundColor:
-          MaterialStateProperty.all(backgroundColor ?? buttonBackgroundColor),
-      foregroundColor: MaterialStateProperty.all(myTextColor),
-      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius))),
-    );
   }
 
   @override
@@ -163,8 +170,7 @@ class _MyButtonsState extends State<MyButtons> {
     } else if (widget.buttonType == ButtonType.roundIcon) {
       return createIconButton();
     } else {
-      // return createSwitchButton();
-      return Container();
+      return createSwitchButton();
     }
   }
 
@@ -236,20 +242,30 @@ class _MyButtonsState extends State<MyButtons> {
     );
   }
 
-  // Widget createSwitchButton() {
-  //   return RollingSwitch.icon(
-  //     onChanged: (bool state) {
-  //       print('turned ${(state) ? 'on' : 'off'}');
-  //     },
-  //     rollingInfoRight: const RollingIconInfo(
-  //       icon: Icons.flag,
-  //       text: Text('Flag'),
-  //     ),
-  //     rollingInfoLeft: const RollingIconInfo(
-  //       icon: Icons.check,
-  //       backgroundColor: Colors.grey,
-  //       text: Text('Check'),
-  //     ),
-  //   );
-  // }
+  Widget createSwitchButton() {
+    return Row(
+      children: [
+        RollingSwitch.icon(
+          width: widget.width,
+          initialState: widget.initialState,
+          onChanged: (bool state) {
+            (state) ? widget.onCallback() : widget.offCallback();
+            setState(() {});
+          },
+          rollingInfoRight: RollingIconInfo(
+              icon: widget.onIcon!,
+              text: widget.onText,
+              iconColor: widget.onIconColor,
+              backgroundColor: widget.onBackGroundColor ?? MyColors().confirm),
+          rollingInfoLeft: RollingIconInfo(
+            icon: widget.offIcon!,
+            text: widget.offText,
+            iconColor: widget.offIconColor,
+            backgroundColor:
+                widget.offBackGroundColor ?? MyColors().mediumGrayColor,
+          ),
+        ),
+      ],
+    );
+  }
 }
