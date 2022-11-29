@@ -5,6 +5,7 @@ import 'package:example/widgets_samples/lst_menu.dart';
 import 'package:example/widgets_samples/lst_texts.dart';
 import 'package:example/widgets_samples/lst_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_widgets/my_widgets.dart';
 
 class MyWidgetsHomePage extends StatefulWidget {
@@ -51,6 +52,16 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                 color: MyColors().black,
               ),
               ...lstOfButtons,
+              MyButtons.switchButton(
+                callback: () {
+                  print('switchbutton');
+                  setState(() {});
+                },
+                icon: FontAwesomeIcons.strava,
+                iconColor: MyColors().white,
+                iconSize: 24,
+                backgroundColor: MyColors().dark,
+              ),
               MyText.h2(
                 text: 'Tiles',
                 color: MyColors().black,
@@ -71,7 +82,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                   color: MyColors().danger,
                 ),
                 size: 60,
-                myBorderColor: (widget.value == 0)
+                borderColor: (widget.value == 0)
                     ? MyColors().dark
                     : MyColors().softGrayColor,
                 callback: () {
@@ -97,7 +108,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                   color: MyColors().danger,
                 ),
                 size: 60,
-                myBorderColor: (widget.value == 1)
+                borderColor: (widget.value == 1)
                     ? MyColors().dark
                     : MyColors().softGrayColor,
                 callback: () {

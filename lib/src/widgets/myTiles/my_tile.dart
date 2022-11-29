@@ -19,9 +19,9 @@ class MyTile extends StatefulWidget {
   Widget? sufixWidget;
 
   //LAYOUT OPTIONS
-  double myBorderRadius = buttonRadius;
-  Color myBackgroundColor = MyColors().white;
-  Color myBorderColor = MyColors().soft;
+  double borderRadius = buttonRadius;
+  Color backgroundColor = MyColors().white;
+  Color borderColor = MyColors().soft;
   Color myTextColor = MyColors().soft;
 
   //ICON OPTIONS
@@ -62,9 +62,9 @@ class MyTile extends StatefulWidget {
     this.enableChecked = false,
     this.size = 60,
   }) {
-    myBorderRadius = borderRadius ?? myBorderRadius;
-    myBackgroundColor = backgroundColor ?? myBackgroundColor;
-    myBorderColor = borderColor ?? myBorderColor;
+    borderRadius = borderRadius ?? borderRadius;
+    backgroundColor = backgroundColor ?? backgroundColor;
+    borderColor = borderColor ?? borderColor;
     myTextColor = textColor ?? myTextColor;
     mySufixIcon = sufixIcon ?? mySufixIcon;
     myPrefixIcon = prefixIcon;
@@ -83,10 +83,10 @@ class MyTile extends StatefulWidget {
     required this.prefixWidget,
     required this.mainWidget,
     this.sufixWidget,
-    this.myBorderRadius = 18,
+    this.borderRadius = 18,
     this.size = 60,
-    this.myBackgroundColor = Colors.white,
-    this.myBorderColor = Colors.black,
+    this.backgroundColor = Colors.white,
+    this.borderColor = Colors.black,
     VoidCallback? callback,
   }) {
     enableChecked = false;
@@ -181,9 +181,9 @@ class _MyTileState extends State<MyTile> {
           child: Container(
             height: widget.size,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(widget.myBorderRadius),
-              border: Border.all(color: widget.myBorderColor),
-              color: widget.myBackgroundColor,
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              border: Border.all(color: widget.borderColor),
+              color: widget.backgroundColor,
             ),
             padding: EdgeInsets.only(left: 14, right: 10, top: 0),
             child: createContent(),

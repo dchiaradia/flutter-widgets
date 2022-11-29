@@ -1,7 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:my_widgets/src/widgets/config.dart';
+import 'package:my_widgets/my_widgets.dart';
+
+enum ButtonType { roundIcon, square, switchButton }
 
 class MyButtons extends StatefulWidget {
   //PROPERTIES
@@ -9,9 +9,12 @@ class MyButtons extends StatefulWidget {
   VoidCallback myCallback = () {};
   bool isLoadingButton = false;
   bool _isLoading = false;
+  ButtonType buttonType = ButtonType.square;
+  Color myBackgroundColor = MyColors().dark;
+  bool? value;
 
   //TEXT OPTIONS
-  String text;
+  String? text;
   Color myTextColor = buttonTextColor;
   double myFontSize = buttonFontSize;
   MainAxisAlignment myAlingment = MainAxisAlignment.center;
@@ -32,6 +35,7 @@ class MyButtons extends StatefulWidget {
     this.isLoadingButton = false,
   }) {
     myCallback = callback;
+    buttonType = ButtonType.square;
     style = ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all(buttonBackgroundColor),
@@ -65,6 +69,7 @@ class MyButtons extends StatefulWidget {
     this.isLoadingButton = false,
   }) {
     myCallback = callback;
+    buttonType = ButtonType.square;
 
     myHeight = height ?? buttonHeight;
     myTextColor = textColor ?? buttonTextColor;
@@ -90,6 +95,62 @@ class MyButtons extends StatefulWidget {
         )));
   }
 
+  MyButtons.roundIcon({
+    required callback,
+    double? height,
+    Color? backgroundColor,
+    required IconData icon,
+    Color? iconColor,
+    double iconSize = 12,
+    this.isLoadingButton = false,
+  }) {
+    myCallback = callback;
+    buttonType = ButtonType.roundIcon;
+    myBackgroundColor = backgroundColor ?? myBackgroundColor;
+
+    myHeight = height ?? buttonHeight;
+    myIconSize = iconSize;
+    myIconColor = iconColor ?? myIconColor;
+    myPrefixIcon = icon;
+
+    style = ButtonStyle(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor:
+          MaterialStateProperty.all(backgroundColor ?? buttonBackgroundColor),
+      foregroundColor: MaterialStateProperty.all(myTextColor),
+      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius))),
+    );
+  }
+
+  MyButtons.switchButton({
+    required callback,
+    double? height,
+    Color? backgroundColor,
+    required IconData icon,
+    Color? iconColor,
+    double iconSize = 12,
+    this.value = true,
+  }) {
+    myCallback = callback;
+    buttonType = ButtonType.switchButton;
+    myBackgroundColor = backgroundColor ?? myBackgroundColor;
+
+    myHeight = height ?? buttonHeight;
+    myIconSize = iconSize;
+    myIconColor = iconColor ?? myIconColor;
+    myPrefixIcon = icon;
+
+    style = ButtonStyle(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor:
+          MaterialStateProperty.all(backgroundColor ?? buttonBackgroundColor),
+      foregroundColor: MaterialStateProperty.all(myTextColor),
+      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius))),
+    );
+  }
+
   @override
   State<MyButtons> createState() => _MyButtonsState();
 }
@@ -97,6 +158,17 @@ class MyButtons extends StatefulWidget {
 class _MyButtonsState extends State<MyButtons> {
   @override
   Widget build(BuildContext context) {
+    if (widget.buttonType == ButtonType.square) {
+      return createSquareButton();
+    } else if (widget.buttonType == ButtonType.roundIcon) {
+      return createIconButton();
+    } else {
+      // return createSwitchButton();
+      return Container();
+    }
+  }
+
+  Widget createSquareButton() {
     return Container(
       height: widget.myHeight,
       width: MediaQuery.of(context).size.width,
@@ -121,7 +193,7 @@ class _MyButtonsState extends State<MyButtons> {
               const SizedBox(
                 width: 12,
               ),
-              Text(widget.text),
+              Text(widget.text!),
               const SizedBox(
                 width: 12,
               ),
@@ -143,4 +215,41 @@ class _MyButtonsState extends State<MyButtons> {
           )),
     );
   }
+
+  Widget createIconButton() {
+    return Ink(
+      decoration: ShapeDecoration(
+        color: widget.myBackgroundColor,
+        shape: CircleBorder(),
+      ),
+      height: widget.myHeight,
+      child: IconButton(
+        iconSize: widget.myIconSize,
+        icon: Icon(widget.myPrefixIcon),
+        color: widget.myIconColor,
+        onPressed: () {
+          widget.myCallback();
+          widget._isLoading = true;
+          setState(() {});
+        },
+      ),
+    );
+  }
+
+  // Widget createSwitchButton() {
+  //   return RollingSwitch.icon(
+  //     onChanged: (bool state) {
+  //       print('turned ${(state) ? 'on' : 'off'}');
+  //     },
+  //     rollingInfoRight: const RollingIconInfo(
+  //       icon: Icons.flag,
+  //       text: Text('Flag'),
+  //     ),
+  //     rollingInfoLeft: const RollingIconInfo(
+  //       icon: Icons.check,
+  //       backgroundColor: Colors.grey,
+  //       text: Text('Check'),
+  //     ),
+  //   );
+  // }
 }
