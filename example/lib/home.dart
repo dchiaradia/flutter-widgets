@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:example/widgets_samples/lst_avatars.dart';
 import 'package:example/widgets_samples/lst_buttons.dart';
 import 'package:example/widgets_samples/lst_inputs.dart';
@@ -6,7 +8,9 @@ import 'package:example/widgets_samples/lst_texts.dart';
 import 'package:example/widgets_samples/lst_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
+
+import 'entities/car_brands.dart';
 
 class MyWidgetsHomePage extends StatefulWidget {
   MyWidgetsHomePage({super.key});
@@ -14,6 +18,7 @@ class MyWidgetsHomePage extends StatefulWidget {
   int value = 0;
   bool panelSlidingUpShowed = false;
   PanelController panelController = PanelController();
+  List<Widget> listaMarcas = [];
 
   @override
   State<MyWidgetsHomePage> createState() => _MyWidgetsHomePageState();
@@ -22,6 +27,30 @@ class MyWidgetsHomePage extends StatefulWidget {
 class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
   @override
   Widget build(BuildContext context) {
+    My().httpClient.get(
+          url: 'https://parallelum.com.br/fipe/api/v1/carros/marcas',
+          onSuccessCallback: (res) {
+            if (res.statusCode != 200) {
+              widget.listaMarcas = [];
+              return;
+            }
+            List<CarBrands> lista = List<CarBrands>.from(
+                res.data.map((e) => CarBrands.fromJson(jsonEncode(e))));
+
+            lista.forEach((element) {
+              widget.listaMarcas.add(
+                MyTile.widget(
+                  prefixWidget: Icon(FontAwesomeIcons.car),
+                  mainWidget: MyText(text: '${element.nome}'),
+                  size: 60,
+                  borderColor: MyColors().dark,
+                  callback: () {},
+                ),
+              );
+            });
+          },
+        );
+
     return Scaffold(
       backgroundColor: MyColors().softGrayColor,
       body: Stack(children: <Widget>[
@@ -156,9 +185,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                       text: 'Menu',
                       color: MyColors().black,
                     ),
-                    MyMenu(
-                      lstItens: lstOfMenuItens,
-                    ),
+                    ...widget.listaMarcas,
                     MySpace.vertical(32),
                   ],
                 )),

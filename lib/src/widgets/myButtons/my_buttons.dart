@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
 import 'package:rolling_switch/rolling_switch.dart';
 
 enum ButtonType { roundIcon, square, switchButton }

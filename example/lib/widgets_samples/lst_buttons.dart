@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
 
 List<Widget> get lstOfButtons => [
       MySpace.vertical(12),

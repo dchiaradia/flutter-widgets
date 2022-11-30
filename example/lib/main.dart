@@ -1,13 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
 
 import 'home.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MyWidget().initializeWithJson('assets/settings_app/example1.json');
+
+  await My().initializeWithJson('assets/settings_app/example1.json');
+
   runApp(const MyApp());
 }
 

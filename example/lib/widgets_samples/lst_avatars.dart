@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
 
 List<Widget> get lstOfAvatars => [
       MyText.h2(

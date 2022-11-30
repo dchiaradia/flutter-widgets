@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_widgets/my_widgets.dart';
+import 'package:my_widgets/my.dart';
 
 TextEditingController textEditingController1 = TextEditingController();
 final _formKey = GlobalKey<FormState>();
