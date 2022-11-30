@@ -5,9 +5,7 @@ import 'home.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await My().initializeWithJson('assets/settings_app/example1.json');
-
   runApp(const MyApp());
 }
 

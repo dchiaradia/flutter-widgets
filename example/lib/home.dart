@@ -26,7 +26,8 @@ class MyWidgetsHomePage extends StatefulWidget {
 
 class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     My().httpClient.get(
           url: 'https://parallelum.com.br/fipe/api/v1/carros/marcas',
           onSuccessCallback: (res) {
@@ -40,6 +41,7 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
             lista.forEach((element) {
               widget.listaMarcas.add(
                 MyTile.widget(
+                  borderRadius: 8,
                   prefixWidget: Icon(FontAwesomeIcons.car),
                   mainWidget: MyText(text: '${element.nome}'),
                   size: 60,
@@ -50,7 +52,10 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
             });
           },
         );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors().softGrayColor,
       body: Stack(children: <Widget>[
@@ -179,16 +184,18 @@ class _MyWidgetsHomePageState extends State<MyWidgetsHomePage> {
                 radius: 32,
                 backgroundColor: MyColors().white,
                 defaultState: PanelState.CLOSED,
-                child: Column(
-                  children: [
-                    MyText.h2(
-                      text: 'Menu',
-                      color: MyColors().black,
-                    ),
-                    ...widget.listaMarcas,
-                    MySpace.vertical(32),
-                  ],
-                )),
+                child: Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        MyText.h2(
+                          text: 'Menu',
+                          color: MyColors().black,
+                        ),
+                        ...widget.listaMarcas,
+                        MySpace.vertical(32),
+                      ],
+                    ))),
       ]),
     );
   }
